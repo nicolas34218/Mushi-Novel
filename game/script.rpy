@@ -35,12 +35,12 @@ label start:
 
         "Pedir uma recomendação de romance.":
             $ points_mushi += 1
-            jump c1_conversa_livro
+            jump route_book_talk
 
         "Não incomodar e procurar sozinho.":
-            jump c1_ignorar
+            jump ignore
 
-label c1_conversa_livro:
+label route_book_talk:
     e "Com licença, Mushi? Estou meio perdido. Tem algum romance bom?"
 
     m "Romance...?"
@@ -64,21 +64,21 @@ label c1_conversa_livro:
     m "O terror é honesto. O medo não mente."
     
     $ knows_secret = True
-    $ renpy.notify("Segredo Descoberto: Fã de Terror")
+    $ renpy.notify("Segredo Descoberto!")
     
     e "Uau. Eu nunca imaginaria. Achei que você fosse..."
     m "...uma bibliotecária tímida e delicada? É, todo mundo acha."
     
     "Conversamos por mais dez minutos. Ela fala com uma paixão assustadora."
-    jump c1_casa
+    jump house
 
-label c1_ignorar:
+label ignore:
     "Melhor não. Ela parece ocupada."
     "Pego um livro qualquer na estante e faço o checkout na máquina automática."
     "Saio sem olhar para trás."
-    jump c1_casa
+    jump house
 
-label c1_casa:
+label house:
     scene black with dissolve
     stop music fadeout 2.0
     
@@ -94,17 +94,16 @@ label c1_casa:
     menu:
         "Devo chamá-la para sair?"
 
-        "Mandar mensagem agora (Convidar para Café)":
+        "Mandar mensagem agora":
             if knows_secret:
-                jump c1_mensagem_sucesso
+                jump success_message
             else:
-                jump c1_mensagem_neutra
+                jump neutral_message
 
-        "Esperar para falar pessoalmente (Hesitar)":
-            jump c1_esperar
+        "Esperar para falar pessoalmente":
+            jump wait
 
-
-label c1_mensagem_sucesso:
+label success_message:
     "Digito: 'Oi Mushi. Achei um sebo que vende livros de terror antigos. Quer ir lá e depois tomar um café amanhã?'"
     "..."
     "BZZT."
@@ -112,37 +111,36 @@ label c1_mensagem_sucesso:
     
     $ date_marked = True
     e "Isso! Vai dar certo."
-    jump capitulo_2
+    jump chapter_2
 
-label c1_mensagem_neutra:
+label neutral_message:
     "Digito: 'Oi Mushi. Quer tomar um café amanhã?'"
     "..."
     "Demora uma hora, mas ela responde."
     "Mushi: 'Pode ser. Preciso sair um pouco da rotina.'"
     
     $ date_marked = True
-    jump capitulo_2
+    jump chapter_2
 
-label c1_esperar:
+label wait:
     "Não... mandar mensagem do nada é estranho."
     "Vou esperar encontrar com ela na biblioteca de novo."
     "Coloco o celular de lado e vou dormir."
-    jump capitulo_2
-
+    jump chapter_2
 
 # Capitulo 2: As Consequencias 
-label capitulo_2:
+label chapter_2:
     scene black
     with Pause(1.0)
     
     "CAPÍTULO 2: Desencontros e Encontros"
     
     if date_marked:
-        jump c2_o_encontro
+        jump c2_date
     else:
-        jump c2_o_desencontro
+        jump c2_mismatch
 
-label c2_o_encontro:
+label c2_date:
     scene bg coffeshop
     play music "audio/piano_calmo.mp3"
     
@@ -171,7 +169,7 @@ label c2_o_encontro:
     "Fim do Capítulo 2 - Rota do Encontro."
     return
 
-label c2_o_desencontro:
+label c2_mismatch:
     scene bg biblioteca
     play music "audio/piano_calmo.mp3"
     
