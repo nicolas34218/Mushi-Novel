@@ -55,23 +55,23 @@ define gui.muted_color = '#510000'
 define gui.hover_muted_color = '#7a0000'
 
 ## As cores usadas para o diálogo e o texto da opção de menu.
-define gui.text_color = '#ffffff'
+define gui.text_color = '#fffdd0'
 define gui.interface_text_color = '#ffffff'
 
 
 ## Fontes e tamanhos de fonte ##################################################
 
 ## A fonte usada para o texto do jogo.
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonte.ttf"
 
 ## A fonte usada para os nomes dos caracteres.
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "fonte.ttf"
 
 ## A fonte usada para o texto fora do jogo.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "fonte.ttf"
 
 ## O tamanho do texto normal do diálogo.
-define gui.text_size = 33
+define gui.text_size = 40
 
 ## O tamanho dos nomes dos caracteres.
 define gui.name_text_size = 45
@@ -136,11 +136,11 @@ define gui.namebox_tile = False
 ## O posicionamento do diálogo em relação à caixa de texto. Esse pode ser um
 ## número inteiro de pixels em relação ao lado esquerdo ou superior da caixa de
 ## texto, ou 0,5 em relação ao centro.
-define gui.dialogue_xpos = 402
+define gui.dialogue_xpos = 400
 define gui.dialogue_ypos = 75
 
 ## A largura máxima do texto da caixa de diálogo, em pixels.
-define gui.dialogue_width = 1116
+define gui.dialogue_width = 1115
 
 ## O alinhamento horizontal do texto da caixa de diálogo. Pode ser 0,0 para
 ## alinhado à esquerda, 0,5 para centralizado e 1,0 para alinhado à direita.
