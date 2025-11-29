@@ -1,10 +1,11 @@
 ﻿# The script of the game goes in this file.
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
+# Declare the images that will be used in game indicating the name and folder
 
 image bg librarybookshelves = "images/bg/librarybookshelves.png"
 image mushinormal = "images/mushi/mushinormal.png"
+
+# Declare characters used by this game. The color argument colorizes the name of the character
 
 define m = Character("Mushi", color="#c8ffc8")
 define e = Character("Eu", color="#c8c8ff")
@@ -17,8 +18,7 @@ default points_mushi = 0
 
 label start:
 
-    scene bg librarybookshelves with dissolve
-    play music "audio/piano.mp3" fadein 2.0
+    scene bg librarybookshelves with fade
 
     "CAPÍTULO 1: O Livro Proibido"
 
@@ -50,15 +50,12 @@ label route_book_talk:
     
     e "Mas?"
     
-    show mushi happy with dissolve
+    show mushinormal with dissolve
     m "Sinceramente? Eu acho romance chato. Ninguém morre no final."
     
-    stop music fadeout 0.5
     "O silêncio na biblioteca parece ficar mais pesado."
     
     e "Espera... você gosta de gente morrendo?"
-    
-    play music "audio/misterio.mp3" fadein 2.0
     
     m "Eu gosto de Terror. Stephen King, Junji Ito, Lovecraft."
     m "O terror é honesto. O medo não mente."
@@ -79,8 +76,7 @@ label ignore:
     jump house
 
 label house:
-    scene black with dissolve
-    stop music fadeout 2.0
+    scene black with fade
     
     "Mais tarde, no meu quarto..."
     
@@ -111,7 +107,11 @@ label success_message:
     
     $ date_marked = True
     e "Isso! Vai dar certo."
+
+    $ renpy.notify("Capítulo concluído!")
     jump chapter_2
+
+
 
 label neutral_message:
     "Digito: 'Oi Mushi. Quer tomar um café amanhã?'"
@@ -120,18 +120,21 @@ label neutral_message:
     "Mushi: 'Pode ser. Preciso sair um pouco da rotina.'"
     
     $ date_marked = True
+
+    $ renpy.notify("Capítulo concluído!")    
     jump chapter_2
 
 label wait:
     "Não... mandar mensagem do nada é estranho."
     "Vou esperar encontrar com ela na biblioteca de novo."
     "Coloco o celular de lado e vou dormir."
+
+    $ renpy.notify("Capítulo concluído!")
     jump chapter_2
 
 # Capitulo 2: As Consequencias 
 label chapter_2:
-    scene black
-    with Pause(1.0)
+    scene black with fade
     
     "CAPÍTULO 2: Desencontros e Encontros"
     
@@ -141,13 +144,12 @@ label chapter_2:
         jump c2_mismatch
 
 label c2_date:
-    scene bg coffeshop
-    play music "audio/piano_calmo.mp3"
+    scene bg coffeshop with fade
     
     "Chego na cafeteria. Mushi já está lá."
     
     if knows_secret:
-        show mushi happy
+        show mushinormal with dissolve
         "Ela está lendo um livro com uma capa preta e vermelha."
         e "Deixa eu adivinhar... alguém morreu na página 10?"
         m "Página 3. É um novo recorde."
@@ -160,23 +162,27 @@ label c2_date:
         "O encontro flui perfeitamente. Sinto que criamos uma conexão real."
         
     else:
-        show mushinormal
+        show mushinormal with dissolve 
         "Ela está tomando chá, olhando para a janela."
         e "Oi, Mushi."
         m "Oi. Obrigada pelo convite."
+
+        # hide mushinormal
+        # hide is good for when the character leaves the scene but does not change the scenario
+
         "O clima é um pouco tímido, já que não temos muito assunto em comum ainda."
         
     "Fim do Capítulo 2 - Rota do Encontro."
+
     return
 
 label c2_mismatch:
-    scene bg biblioteca
-    play music "audio/piano_calmo.mp3"
+    scene bg biblioteca with fade
     
     "Dois dias depois, volto à biblioteca."
     "Procuro por Mushi no balcão."
     
-    show mushinormal
+    show mushinormal with dissolve 
     
     e "Oi, Mushi."
     
@@ -199,4 +205,6 @@ label c2_mismatch:
     "Vou ter que trabalhar duro para recuperar a atenção dela."
     
     "Fim do Capítulo 2 - Rota da Friendzone."
+
     return
+ 
